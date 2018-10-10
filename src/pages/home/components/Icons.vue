@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper>
+        <swiper :options="swiperOption" >
             <!-- slides -->
             <swiper-slide v-for="(page,index) of pages" :key="index">
                 <div class="icon" v-for="item of page" :key="item.id">
@@ -10,61 +10,27 @@
                     <p class="icon-desc">{{item.desc}}</p>
                 </div>
             </swiper-slide>
-            <!-- Optional controls -->
-            <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
-
     </div>
 </template>
 
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      iconList: [ {
-        id: '0001',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '飞机票'
-      }, {
-        id: '0002',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '滑雪地'
-      }, {
-        id: '0003',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0004',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0005',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0006',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0007',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0008',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '泡温泉'
-      }, {
-        id: '0009',
-        imgUrl: 'http://s.qunarzz.com/touch_home/imgs/flight.png',
-        desc: '一日游'
-      }]
+      swiperOption: {
+        autoplay: false
+      }
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
